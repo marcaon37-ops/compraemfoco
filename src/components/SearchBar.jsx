@@ -1,15 +1,40 @@
-"use client";
+import {
+  ShieldCheck,
+  Truck,
+  BadgePercent,
+  CreditCard,
+} from "lucide-react";
 
-export default function SearchBar({ search, setSearch }) {
+export default function TopBar() {
+  const items = [
+    {
+      icon: <BadgePercent size={18} />,
+      text: "Ofertas atualizadas diariamente",
+    },
+    {
+      icon: <Truck size={18} />,
+      text: "Compare fretes",
+    },
+    {
+      icon: <CreditCard size={18} />,
+      text: "Melhores condições de pagamento",
+    },
+    {
+      icon: <ShieldCheck size={18} />,
+      text: "Compras mais seguras",
+    },
+  ];
+
   return (
-    <div className="mx-auto max-w-3xl">
-      <input
-        type="text"
-        placeholder="Pesquisar produtos..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="w-full rounded-xl border border-gray-300 px-5 py-4 text-lg shadow-sm focus:border-blue-600 focus:outline-none"
-      />
-    </div>
+    <section className="bg-blue-600 text-white">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-8 px-4 py-3 text-sm">
+        {items.map((item, index) => (
+          <div key={index} className="flex items-center gap-2">
+            {item.icon}
+            <span>{item.text}</span>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }

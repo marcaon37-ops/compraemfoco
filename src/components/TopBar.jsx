@@ -1,21 +1,40 @@
+import {
+  BadgePercent,
+  ShieldCheck,
+  Truck,
+  CreditCard,
+} from "lucide-react";
+
+const items = [
+  {
+    icon: <BadgePercent size={18} />,
+    text: "Ofertas atualizadas diariamente",
+  },
+  {
+    icon: <Truck size={18} />,
+    text: "Compare fretes",
+  },
+  {
+    icon: <CreditCard size={18} />,
+    text: "Parcele nas melhores lojas",
+  },
+  {
+    icon: <ShieldCheck size={18} />,
+    text: "Compras mais seguras",
+  },
+];
+
 export default function TopBar() {
   return (
-
-    <div className="bg-blue-600 text-white">
-
-      <div className="mx-auto flex max-w-7xl justify-between px-6 py-3 text-sm font-medium">
-
-        <span>🏷️ Ofertas atualizadas todos os dias</span>
-
-        <span>💰 As melhores ofertas em um só lugar</span>
-
-        <span>🛡️ 100% Seguro</span>
-
-        <span>💳 Parcele em até 12x</span>
-
+    <section className="bg-blue-600 text-white">
+      <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-center gap-8 px-4 py-3 text-sm">
+        {items.map((item, index) => (
+          <div key={index} className="flex items-center gap-2">
+            {item.icon}
+            <span>{item.text}</span>
+          </div>
+        ))}
       </div>
-
-    </div>
-
+    </section>
   );
 }

@@ -1,81 +1,76 @@
-"use client";
+import {
+  Heart,
+  Star,
+  ShoppingCart,
+} from "lucide-react";
 
-import Image from "next/image";
-import Link from "next/link";
-import { Heart, Star } from "lucide-react";
-
-export default function ProductCard({ produto }) {
+export default function ProductCard({
+  image,
+  title,
+  store,
+  oldPrice,
+  price,
+  discount,
+}) {
   return (
-    <div className="group overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
-
-      {/* Topo */}
+    <article className="group overflow-hidden rounded-3xl bg-white shadow transition hover:-translate-y-2 hover:shadow-xl">
 
       <div className="relative">
 
-        <button className="absolute right-4 top-4 z-10 rounded-full bg-white p-2 shadow hover:bg-red-50">
-          <Heart size={20} className="text-gray-500 hover:text-red-500" />
+        <button className="absolute right-4 top-4 z-10 rounded-full bg-white p-2 shadow">
+          <Heart size={18} />
         </button>
 
-        <span className="absolute left-4 top-4 z-10 rounded-full bg-green-600 px-3 py-1 text-xs font-bold text-white">
-          -20%
-        </span>
-
-        <div className="relative h-64 bg-gray-50">
-
-          <Image
-            src={produto.imagem}
-            alt={produto.nome}
-            fill
-            className="object-contain p-6 transition duration-300 group-hover:scale-105"
-          />
-
-        </div>
+        <img
+          src={image}
+          alt={title}
+          className="h-64 w-full object-contain p-6 transition duration-300 group-hover:scale-105"
+        />
 
       </div>
 
-      {/* Conteúdo */}
+      <div className="space-y-3 p-6">
 
-      <div className="p-5">
+        <span className="rounded-full bg-red-100 px-3 py-1 text-sm font-bold text-red-600">
+          {discount}
+        </span>
 
-        <p className="text-sm text-gray-500">
-          {produto.loja}
-        </p>
-
-        <h3 className="mt-2 line-clamp-2 text-lg font-bold">
-          {produto.nome}
+        <h3 className="line-clamp-2 text-lg font-bold">
+          {title}
         </h3>
 
-        <div className="mt-3 flex items-center gap-1 text-yellow-500">
+        <div className="flex items-center gap-1 text-yellow-500">
 
-          <Star size={18} fill="currentColor" />
-          <Star size={18} fill="currentColor" />
-          <Star size={18} fill="currentColor" />
-          <Star size={18} fill="currentColor" />
-          <Star size={18} />
+          <Star fill="currentColor" size={16} />
+          <Star fill="currentColor" size={16} />
+          <Star fill="currentColor" size={16} />
+          <Star fill="currentColor" size={16} />
+          <Star fill="currentColor" size={16} />
 
           <span className="ml-2 text-sm text-gray-500">
-            ({produto.avaliacao})
+            Loja: {store}
           </span>
 
         </div>
 
-        <p className="mt-4 text-sm text-gray-400 line-through">
-          R$ {produto.precoAnterior.toLocaleString("pt-BR")}
+        <p className="text-sm text-gray-400 line-through">
+          {oldPrice}
         </p>
 
-        <p className="text-3xl font-black text-green-600">
-          R$ {produto.preco.toLocaleString("pt-BR")}
+        <p className="text-3xl font-black text-blue-600">
+          {price}
         </p>
 
-        <Link
-          href={`/produto/${produto.id}`}
-          className="mt-6 block rounded-xl bg-blue-600 py-4 text-center font-bold text-white transition hover:bg-blue-700"
-        >
+        <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-4 font-bold text-white transition hover:bg-blue-700">
+
+          <ShoppingCart size={20} />
+
           Ver Oferta
-        </Link>
+
+        </button>
 
       </div>
 
-    </div>
+    </article>
   );
 }
