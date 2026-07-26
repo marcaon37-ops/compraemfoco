@@ -1,45 +1,85 @@
+"use client";
+
+import Link from "next/link";
+import {
+  Search,
+  Heart,
+  ShoppingBag,
+  Menu,
+} from "lucide-react";
+
 export default function Header() {
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white/90 backdrop-blur">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-blue-600 text-xl text-white">
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
+
+      <div className="mx-auto flex h-24 max-w-7xl items-center gap-6 px-6">
+
+        {/* Logo */}
+        <Link href="/" className="flex items-center gap-3">
+
+          <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-blue-600 text-white text-2xl">
             🛒
           </div>
 
           <div>
-            <h1 className="text-xl font-bold text-gray-900">
-              CompraEmFoco
+            <h1 className="text-3xl font-black leading-none">
+              Compra
+              <span className="text-blue-600">Em</span>
+              <span className="text-green-600">Foco</span>
             </h1>
 
-            <p className="text-sm text-gray-500">
-              Compare antes de comprar
+            <p className="text-xs text-gray-500">
+              Compare preços. Economize sempre.
             </p>
           </div>
+
+        </Link>
+
+        {/* Pesquisa */}
+
+        <div className="hidden flex-1 lg:flex">
+
+          <div className="flex w-full overflow-hidden rounded-full border-2 border-blue-600">
+
+            <input
+              type="text"
+              placeholder="Pesquisar produtos..."
+              className="flex-1 px-6 py-4 outline-none"
+            />
+
+            <button className="flex w-20 items-center justify-center bg-blue-600 text-white hover:bg-blue-700">
+
+              <Search size={24} />
+
+            </button>
+
+          </div>
+
         </div>
 
-        <nav className="hidden gap-8 font-medium md:flex">
-          <a href="#" className="hover:text-blue-600">
-            Início
-          </a>
+        {/* Menu */}
 
-          <a href="#" className="hover:text-blue-600">
-            Categorias
-          </a>
+        <div className="flex items-center gap-8">
 
-          <a href="#" className="hover:text-blue-600">
-            Ofertas
-          </a>
+          <button className="flex flex-col items-center text-gray-700 hover:text-blue-600">
+            <Heart size={26} />
+            <span className="text-sm">Favoritos</span>
+          </button>
 
-          <a href="#" className="hover:text-blue-600">
-            Contato
-          </a>
-        </nav>
+          <button className="flex flex-col items-center text-gray-700 hover:text-blue-600">
+            <ShoppingBag size={26} />
+            <span className="text-sm">Ofertas</span>
+          </button>
 
-        <button className="rounded-xl bg-blue-600 px-5 py-3 font-semibold text-white transition hover:bg-blue-700">
-          Entrar
-        </button>
+          <button className="flex flex-col items-center text-gray-700 hover:text-blue-600">
+            <Menu size={26} />
+            <span className="text-sm">Menu</span>
+          </button>
+
+        </div>
+
       </div>
+
     </header>
   );
 }
