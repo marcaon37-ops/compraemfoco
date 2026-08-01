@@ -1,76 +1,33 @@
-import {
-  Heart,
-  Star,
-  ShoppingCart,
-} from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { Heart, Star, Truck } from "lucide-react";
+import { formatPrice } from "@/utils/formatPrice";
 
-export default function ProductCard({
-  image,
-  title,
-  store,
-  oldPrice,
-  price,
-  discount,
-}) {
+export default function ProductCard({ product }) {
+  const discount = Math.round((1 - product.preco / product.precoAnterior) * 100);
+
   return (
-    <article className="group overflow-hidden rounded-3xl bg-white shadow transition hover:-translate-y-2 hover:shadow-xl">
-
-      <div className="relative">
-
-        <button className="absolute right-4 top-4 z-10 rounded-full bg-white p-2 shadow">
-          <Heart size={18} />
-        </button>
-
-        <img
-          src={image}
-          alt={title}
-          className="h-64 w-full object-contain p-6 transition duration-300 group-hover:scale-105"
+    <article className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white transition duration-200 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl hover:shadow-slate-200/70">
+      <div className="relative border-b border-slate-100 bg-slate-50">
+        <Image
+          src={product.imagem}
+          width={400}
+          height={400}
+          alt={product.nome}
+          className="h-48 w-full object-contain p-5 transition duration-300 group-hover:scale-105 sm:h-52"
         />
-
+        <span className="absolute left-3 top-3 rounded-md bg-white px-2 py-1 text-xs font-bold text-slate-700 shadow-sm">{product.loja}</span>
+        <span className="absolute right-3 top-3 rounded-md bg-red-600 px-2 py-1 text-xs font-extrabold text-white">-{discount}%</span>
+        <button className="absolute bottom-3 right-3 grid size-8 place-items-center rounded-full bg-white text-slate-500 shadow-sm transition hover:text-red-500" type="button" aria-label={`Adicionar ${product.nome} aos favoritos`}><Heart className="size-4" /></button>
       </div>
-
-      <div className="space-y-3 p-6">
-
-        <span className="rounded-full bg-red-100 px-3 py-1 text-sm font-bold text-red-600">
-          {discount}
-        </span>
-
-        <h3 className="line-clamp-2 text-lg font-bold">
-          {title}
-        </h3>
-
-        <div className="flex items-center gap-1 text-yellow-500">
-
-          <Star fill="currentColor" size={16} />
-          <Star fill="currentColor" size={16} />
-          <Star fill="currentColor" size={16} />
-          <Star fill="currentColor" size={16} />
-          <Star fill="currentColor" size={16} />
-
-          <span className="ml-2 text-sm text-gray-500">
-            Loja: {store}
-          </span>
-
-        </div>
-
-        <p className="text-sm text-gray-400 line-through">
-          {oldPrice}
-        </p>
-
-        <p className="text-3xl font-black text-blue-600">
-          {price}
-        </p>
-
-        <button className="flex w-full items-center justify-center gap-2 rounded-xl bg-blue-600 py-4 font-bold text-white transition hover:bg-blue-700">
-
-          <ShoppingCart size={20} />
-
-          Ver Oferta
-
-        </button>
-
+      <div className="p-4 sm:p-5">
+        <div className="flex items-center gap-1 text-xs font-semibold text-amber-500"><Star className="size-3.5 fill-current" /><span>{product.avaliacao.toFixed(1)}</span><span className="ml-1 font-normal text-slate-400">Avaliação dos compradores</span></div>
+        <h3 className="mt-2 min-h-11 text-sm font-bold leading-5 text-slate-800 sm:text-base">{product.nome}</h3>
+        <p className="mt-3 text-xs text-slate-400 line-through">De {formatPrice(product.precoAnterior)}</p>
+        <p className="text-2xl font-black tracking-tight text-blue-700 sm:text-3xl">{formatPrice(product.preco)}</p>
+        <p className="mt-2 flex items-center gap-1 text-xs font-semibold text-emerald-700"><Truck className="size-3.5" />{product.frete}</p>
+        <Link href={`/produto/${product.id}`} className="mt-4 block rounded-xl border border-blue-600 py-2.5 text-center text-sm font-bold text-blue-700 transition hover:bg-blue-600 hover:text-white">Ver oferta</Link>
       </div>
-
     </article>
   );
 }

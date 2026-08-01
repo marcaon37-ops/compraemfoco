@@ -1,68 +1,16 @@
-import ProductCard from "./ProductCard";
-
-const products = [
-  {
-    image: "https://placehold.co/500x500/png",
-    title: "iPhone 16 Pro Max 256GB",
-    store: "Amazon",
-    oldPrice: "R$ 10.499",
-    price: "R$ 8.999",
-    discount: "-14%",
-  },
-  {
-    image: "https://placehold.co/500x500/png",
-    title: "Samsung Galaxy S25 Ultra",
-    store: "Mercado Livre",
-    oldPrice: "R$ 8.999",
-    price: "R$ 7.499",
-    discount: "-17%",
-  },
-  {
-    image: "https://placehold.co/500x500/png",
-    title: "Notebook Gamer RTX 4060",
-    store: "Kabum",
-    oldPrice: "R$ 7.999",
-    price: "R$ 6.499",
-    discount: "-19%",
-  },
-  {
-    image: "https://placehold.co/500x500/png",
-    title: 'Smart TV LG OLED 55"',
-    store: "Magazine Luiza",
-    oldPrice: "R$ 5.299",
-    price: "R$ 4.499",
-    discount: "-15%",
-  },
-  {
-    image: "https://placehold.co/500x500/png",
-    title: "PlayStation 5 Slim",
-    store: "Amazon",
-    oldPrice: "R$ 4.699",
-    price: "R$ 3.999",
-    discount: "-15%",
-  },
-  {
-    image: "https://placehold.co/500x500/png",
-    title: "Apple Watch Ultra 2",
-    store: "Amazon",
-    oldPrice: "R$ 6.299",
-    price: "R$ 5.399",
-    discount: "-14%",
-  },
-];
+import ProductCard from "@/components/ProductCard";
+import products from "@/data/products";
 
 export default function Products() {
   return (
-    <section className="mx-auto max-w-7xl px-4 pb-12">
-
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-
-        {products.map((product, index) => (
-          <ProductCard key={index} {...product} />
-        ))}
-
+    <section id="ofertas" className="mx-auto max-w-7xl px-4 pb-14 sm:pb-20 lg:px-6">
+      <div className="mb-6 flex flex-col justify-between gap-3 sm:flex-row sm:items-end">
+        <div><p className="text-sm font-semibold text-blue-600">Seleção do dia</p><h2 className="mt-1 text-2xl font-black tracking-tight text-slate-950 sm:text-3xl">Ofertas em destaque</h2><p className="mt-1 text-sm text-slate-500">Produtos com preços verificados nas principais lojas.</p></div>
+        <a href="#ofertas" className="text-sm font-bold text-blue-600 hover:text-blue-700">Ver todas as ofertas</a>
       </div>
-
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        {products.map((product) => <ProductCard key={product.id} product={product} />)}
+      </div>
     </section>
   );
 }

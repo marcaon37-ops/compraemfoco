@@ -1,37 +1,35 @@
+import { BadgeCheck, PackageCheck, Tags } from "lucide-react";
+
 export default function Benefits() {
   const itens = [
     {
-      titulo: "Compare preços",
-      descricao: "Encontre rapidamente o menor preço entre diversas lojas.",
-      icone: "💰",
+      titulo: "Preços comparados",
+      descricao: "Veja rapidamente onde sua compra vale mais a pena.",
+      icone: Tags,
     },
     {
       titulo: "Ofertas verificadas",
-      descricao: "Promoções selecionadas diariamente.",
-      icone: "🔥",
+      descricao: "Monitoramos promoções para você comprar com confiança.",
+      icone: BadgeCheck,
     },
     {
-      titulo: "Compra segura",
-      descricao: "Links para lojas reconhecidas no mercado.",
-      icone: "🛡️",
+      titulo: "Lojas confiáveis",
+      descricao: "Encontre grandes varejistas em um único lugar.",
+      icone: PackageCheck,
     },
   ];
 
   return (
-    <section className="mx-auto max-w-7xl px-6 py-16">
-      <div className="grid gap-6 md:grid-cols-3">
-        {itens.map((item) => (
-          <div
-            key={item.titulo}
-            className="rounded-2xl bg-white p-8 shadow-md"
-          >
-            <div className="mb-4 text-5xl">{item.icone}</div>
-            <h3 className="text-xl font-bold">{item.titulo}</h3>
-            <p className="mt-3 text-gray-600">
-              {item.descricao}
-            </p>
-          </div>
+    <section className="bg-slate-50 py-10 sm:py-14">
+      <div className="mx-auto max-w-7xl px-4 lg:px-6">
+        <div className="grid gap-4 md:grid-cols-3">
+          {itens.map(({ titulo, descricao, icone: Icon }) => (
+            <div key={titulo} className="flex gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+              <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-blue-50 text-blue-600"><Icon className="size-5" /></span>
+              <div><h2 className="font-bold text-slate-900">{titulo}</h2><p className="mt-1 text-sm leading-5 text-slate-500">{descricao}</p></div>
+            </div>
         ))}
+        </div>
       </div>
     </section>
   );
