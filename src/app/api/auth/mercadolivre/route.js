@@ -10,5 +10,5 @@ export async function GET() {
     `&client_id=${clientId}` +
     `&redirect_uri=${encodeURIComponent(redirectUri)}`;
 
-  return NextResponse.redirect(url);
+  return NextResponse.redirect(new URL(url));
 }
