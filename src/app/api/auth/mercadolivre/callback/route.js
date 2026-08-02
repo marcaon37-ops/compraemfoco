@@ -1,14 +1,18 @@
 import { NextResponse } from "next/server";
 
-export async function GET() {
-  const clientId = process.env.MELI_CLIENT_ID;
-  const redirectUri = process.env.MELI_REDIRECT_URI;
+export async function GET(request) {
+  const { searchParams } = new URL(request.url);
 
-  const url =
-    `https://auth.mercadolivre.com.br/authorization` +
-    `?response_type=code` +
-    `&client_id=${clientId}` +
-    `&redirect_uri=${encodeURIComponent(redirectUri)}`;
+  const code = searchParams.get("code");
 
-  return NextResponse.redirect(url);
+  if (!code) {
+    return NextResponse.json({
+      erro: "Código de autorização não recebido."
+    });
+  }
+
+  return NextResponse.json({
+    sucesso: true,
+    code
+  });
 }
